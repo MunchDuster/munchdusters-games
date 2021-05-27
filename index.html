@@ -1,10 +1,13 @@
 <html>
 	<head> 
 		<title>MunchDuster's Games</title>
+		<link rel="shortcut icon" href="mememan.png" />
 		<link rel="preconnect" href="https://fonts.gstatic.com">
 		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
 		<link rel="preconnect" href="https://fonts.gstatic.com">
 		<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css2?family=Arimo&display=swap" rel="stylesheet">
 		<style>
 			body
 			{
@@ -22,6 +25,9 @@
 			{
 				padding: 5px;
 				background-color: rgb(184, 184, 184);
+				bottom:0px;
+				position: relative;
+				min-height: calc(100% - 68px);
 			}
 			.GameIcon
 			{
@@ -42,6 +48,16 @@
 				padding: 5px;
 				border-radius: 100px;
 			}
+			.VersionNumber
+			{
+				font-size: 15px	;
+				display: inline-block;
+				color: white;
+				font-family: 'Arimo';
+				margin-bottom: 20px;
+				vertical-align: text-bottom;
+				margin-left: 5px;
+			}
 			.GameName
 			{
 				color:white;
@@ -55,6 +71,7 @@
 			h1
 			{
 				font-family: 'Poppins';
+				margin: 5px;
 			}
 		</style>
 	</head>
@@ -69,9 +86,9 @@
 			const gameList = document.getElementById("GameList");
 			
 			//ADD GAMES TO LIST
-			addGame2List('MrPewPew2/Mr Pew Pew 2.zip','MrPewPew2/icon.png','Mr Pew Pew 2');
+			addGame2List('MrPewPew2/Mr Pew Pew 2.zip','MrPewPew2/icon.png','Mr Pew Pew 2', 0.1);
 			
-			function addGame2List(file, icon, name)
+			function addGame2List(file, icon, name, vNum)
 			{
 				//CREATE OUTER DIV
 				var outerDiv = document.createElement('div');
@@ -89,10 +106,16 @@
 				gameName.innerText = name;
 				outerDiv.appendChild(gameName);
 				
+				//VERSION NUMBER
+				var versionNumber = document.createElement('div');
+				versionNumber.className = "VersionNumber";
+				versionNumber.innerText = vNum;
+				outerDiv.appendChild(versionNumber);
+				
 				//DOWNLOAD LINK
 				var downloadLink = document.createElement('a');
 				downloadLink.href = file;
-				//downloadLink.download = 'true';
+				//x	downloadLink.download = 'true';
 				outerDiv.appendChild(downloadLink);
 				
 				//DOWNLOAD ICON
