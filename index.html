@@ -1,0 +1,113 @@
+<html>
+	<head> 
+		<title>MunchDuster's Games</title>
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+		<style>
+			body
+			{
+				margin: 0px;
+			}
+			.ListedGame
+			{
+				width: calc(100% - 10px);
+				height: 70px;
+				background-color: rgb(33, 33, 33);
+				border-radius: 5px;
+				margin:5px;
+			}
+			.GameList
+			{
+				padding: 5px;
+				background-color: rgb(184, 184, 184);
+			}
+			.GameIcon
+			{
+				width: 60px;
+				height: 60px;
+				margin:5px;
+				display: inline-block;
+				border-radius: 3px;
+			}
+			.DownloadIcon
+			{
+				width: 40px;
+				height: 40px;
+				float: right;
+				margin:10px;
+				
+				background-color: white;
+				padding: 5px;
+				border-radius: 100px;
+			}
+			.GameName
+			{
+				color:white;
+				font-family: 'Roboto';
+				font-size: 30px;
+				height: 70px;
+				vertical-align:top;
+				margin-top: 20px;
+				display: inline-block;
+			}
+			h1
+			{
+				font-family: 'Poppins';
+			}
+		</style>
+	</head>
+	<body>
+		<div style="text-align: center;">
+			<h1>MunchDuster's Games</h1>
+		</div>
+		<div id="GameList" class="GameList">
+			
+		</div>
+		<script>
+			const gameList = document.getElementById("GameList");
+			
+			//ADD GAMES TO LIST
+			addGame2List('MrPewPew2/Mr Pew Pew 2.zip','MrPewPew2/icon.png','Mr Pew Pew 2');
+			
+			function addGame2List(file, icon, name)
+			{
+				//CREATE OUTER DIV
+				var outerDiv = document.createElement('div');
+				outerDiv.className = "ListedGame";
+				
+				//GAME ICON
+				var gameIcon = document.createElement('img');
+				gameIcon.className = "GameIcon";
+				gameIcon.src = icon;
+				outerDiv.appendChild(gameIcon);
+				
+				//GAME NAME
+				var gameName = document.createElement('div');
+				gameName.className = "GameName";
+				gameName.innerText = name;
+				outerDiv.appendChild(gameName);
+				
+				//DOWNLOAD LINK
+				var downloadLink = document.createElement('a');
+				downloadLink.href = file;
+				//downloadLink.download = 'true';
+				outerDiv.appendChild(downloadLink);
+				
+				//DOWNLOAD ICON
+				var downloadIcon = document.createElement('img');
+				downloadIcon.className = 'DownloadIcon';
+				downloadIcon.src = 'download.png';
+				downloadLink.appendChild(downloadIcon);
+				
+				
+				
+				//ADD TO GAME LIST
+				gameList.appendChild(outerDiv);
+				
+				
+				
+			}
+		</script>
+	</body>
