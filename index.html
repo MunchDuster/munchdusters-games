@@ -12,22 +12,29 @@
 			body
 			{
 				margin: 0px;
+				background: url(cubes.jpg);
 			}
 			.ListedGame
 			{
 				width: calc(100% - 10px);
+				max-width: 600px;
 				height: 70px;
 				background-color: rgb(33, 33, 33);
 				border-radius: 5px;
 				margin:5px;
+				text-align: left;
 			}
 			.GameList
 			{
 				padding: 5px;
-				background-color: rgb(184, 184, 184);
+				
+				
+				text-align: -webkit-center;
 				bottom:0px;
-				position: relative;
-				min-height: calc(100% - 68px);
+				top:60px;
+				width: calc(100% - 10px);
+				position: absolute;
+				min-height: calc(100% - 70px);
 			}
 			.GameIcon
 			{
@@ -69,16 +76,26 @@
 				display: inline-block;
 			}
 			h1
+			
 			{
+				background-color: white;
 				font-family: 'Poppins';
 				margin: 5px;
+				margin-top: 0px;
+				position: fixed;
+				margin-left: 50%;
+				transform: translateX(-50%);
+				text-align: center;
+				font-size: 35px;
+				top:0px;
+				width: 100%	;
+				z-index: 1;
 			}
+			
 		</style>
 	</head>
 	<body>
-		<div style="text-align: center;">
-			<h1>MunchDuster's Games</h1>
-		</div>
+		<h1>MunchDuster's Games</h1>	
 		<div id="GameList" class="GameList">
 			
 		</div>
@@ -86,7 +103,7 @@
 			const gameList = document.getElementById("GameList");
 			
 			//ADD GAMES TO LIST
-			addGame2List('MrPewPew2/Mr Pew Pew 2.zip','MrPewPew2/icon.png','Mr Pew Pew', 0.1);
+			addGame2List('MrPewPew/Mr Pew Pew.zip','MrPewPew/icon.png','Mr Pew Pew', 0.1);
 			addGame2List('Drifty Tanks/Drifty Tanks.zip','Drifty Tanks/icon.png','Drifty Tanks',0.3);
 			function addGame2List(file, icon, name, vNum)
 			{
