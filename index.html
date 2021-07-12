@@ -3,152 +3,25 @@
 		<title>MunchDuster's Games</title>
 		<link rel="shortcut icon" href="mememan.png" />
 		<link rel="preconnect" href="https://fonts.gstatic.com">
-		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
 		<link rel="preconnect" href="https://fonts.gstatic.com">
 		<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 		<link rel="preconnect" href="https://fonts.gstatic.com">
 		<link href="https://fonts.googleapis.com/css2?family=Arimo&display=swap" rel="stylesheet">
-		<style>
-			body
-			{
-				margin: 0px;
-				background: url(cubes.jpg);
-			}
-			.ListedGame
-			{
-				width: calc(100% - 10px);
-				max-width: 600px;
-				height: 70px;
-				background-color: rgb(33, 33, 33);
-				border-radius: 5px;
-				margin:5px;
-				text-align: left;
-			}
-			.GameList
-			{
-				padding: 5px;
-				
-				
-				text-align: -webkit-center;
-				bottom:0px;
-				top:60px;
-				width: calc(100% - 10px);
-				position: absolute;
-				min-height: calc(100% - 70px);
-			}
-			.GameIcon
-			{
-				width: 60px;
-				height: 60px;
-				margin:5px;
-				display: inline-block;
-				border-radius: 3px;
-			}
-			.DownloadIcon
-			{
-				width: 40px;
-				height: 40px;
-				float: right;
-				margin:10px;
-				
-				background-color: white;
-				padding: 5px;
-				border-radius: 100px;
-			}
-			.VersionNumber
-			{
-				font-size: 15px	;
-				display: inline-block;
-				color: white;
-				font-family: 'Arimo';
-				margin-bottom: 20px;
-				vertical-align: text-bottom;
-				margin-left: 5px;
-			}
-			.GameName
-			{
-				color:white;
-				font-family: 'Roboto';
-				font-size: 30px;
-				height: 70px;
-				vertical-align:top;
-				margin-top: 20px;
-				display: inline-block;
-			}
-			h1
-			
-			{
-				background-color: white;
-				font-family: 'Poppins';
-				margin: 5px;
-				margin-top: 0px;
-				position: fixed;
-				margin-left: 50%;
-				transform: translateX(-50%);
-				text-align: center;
-				font-size: 35px;
-				top:0px;
-				width: 100%	;
-				z-index: 1;
-			}
-			
-		</style>
+		<link rel="stylesheet" href="style.css">
 	</head>
 	<body>
 		<h1>MunchDuster's Games</h1>	
-		<div id="GameList" class="GameList">
-			
+		<div id="GameList" class="GameList"></div>
+		<div id="GameBox" class="GameBox">
+			<img class="GameBoxIcon"></img>
+			<div class="GameBoxName"></div>
+			<div class="GameBoxVersionNumber"></div>
+			<button class="GameBoxDownloadButton">Download ZIP</button>
+			<div class="GameDescriptionTitle">Description</div>
+			<div class="GameDescription"></div>
+			<div class="GameDownloads">45 Downloads</div>
+			<img src="back.png" class="backButton" onclick="back2MainMenu();">
 		</div>
-		<script>
-			const gameList = document.getElementById("GameList");
-			
-			//ADD GAMES TO LIST
-			addGame2List('MrPewPew/Mr Pew Pew.zip','MrPewPew/icon.png','Mr Pew Pew', 0.1);
-			addGame2List('Drifty Tanks/Drifty Tanks.zip','Drifty Tanks/icon.png','Drifty Tanks',0.3);
-			function addGame2List(file, icon, name, vNum)
-			{
-				//CREATE OUTER DIV
-				var outerDiv = document.createElement('div');
-				outerDiv.className = "ListedGame";
-				
-				//GAME ICON
-				var gameIcon = document.createElement('img');
-				gameIcon.className = "GameIcon";
-				gameIcon.src = icon;
-				outerDiv.appendChild(gameIcon);
-				
-				//GAME NAME
-				var gameName = document.createElement('div');
-				gameName.className = "GameName";
-				gameName.innerText = name;
-				outerDiv.appendChild(gameName);
-				
-				//VERSION NUMBER
-				var versionNumber = document.createElement('div');
-				versionNumber.className = "VersionNumber";
-				versionNumber.innerText = vNum;
-				outerDiv.appendChild(versionNumber);
-				
-				//DOWNLOAD LINK
-				var downloadLink = document.createElement('a');
-				downloadLink.href = file;
-				downloadLink.style.contentType = 'application/zip';
-				//x	downloadLink.download = 'true';
-				outerDiv.appendChild(downloadLink);
-				
-				//DOWNLOAD ICON
-				var downloadIcon = document.createElement('img');
-				downloadIcon.className = 'DownloadIcon';
-				downloadIcon.src = 'download.png';
-				downloadLink.appendChild(downloadIcon);
-				
-				
-				
-				//ADD TO GAME LIST
-				gameList.appendChild(outerDiv);
-				
-				
-				
-			}
-		</script>
+		<script type="text/javascript" src="script.js"></script>
 	</body>
