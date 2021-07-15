@@ -1,0 +1,20 @@
+{
+  "name": "munchdusters-games",
+  "version": "1.0.0",
+  "description": "where i put my games",
+  "main": "gamescript.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MunchDuster/MunchDusters-Games.git"
+  },
+  "author": "MunchDuster",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MunchDuster/MunchDusters-Games/issues"
+  },
+  "homepage": "https://github.com/MunchDuster/MunchDusters-Games#readme"
+}
