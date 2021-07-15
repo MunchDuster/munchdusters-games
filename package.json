@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "where i put my games",
   "main": "gamescript.js",
+"dependencies": {
+    "express": "^4.17.1",
+    "openssl": "^1.1.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
