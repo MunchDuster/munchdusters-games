@@ -64,6 +64,7 @@ function addGame2List(game) {
     gameDiv
       .querySelector(".GameBoxDownloadButton")
       .setAttribute("downloadName", game.name);
+    gameDiv.querySelector(".GameBoxDownloadButton").href = game.downloadFile;
     gameDiv
       .querySelector(".GameBoxDownloadButton")
       .setAttribute("downloadLink", game.downloadFile);

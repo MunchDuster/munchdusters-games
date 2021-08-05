@@ -23,6 +23,10 @@ body {
   min-height: calc(100% - 70px);
 }
 .GameBoxDownloadButton {
+  text-decoration: none;
+  font-family: "Roboto";
+  text-align: center;
+
   background-color: #353535;
   border: none;
   height: 40px;
