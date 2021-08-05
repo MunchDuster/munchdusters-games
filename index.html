@@ -11,13 +11,14 @@
 		<link rel="stylesheet" href="style.css">
 	</head>
 	<body>
+	<script src="sounds.js"></script>
 		<h1>MunchDuster's Games</h1>	
 		<div id="GameList" class="GameList"></div>
 		<div id="GameBox" class="GameBox">
 			<img class="GameBoxIcon"></img>
 			<div class="GameBoxName"></div>
 			<div class="GameBoxVersionNumber"></div>
-			<a class="GameBoxDownloadButton">
+			<a href="javascript:downloadButtonClicked();" onhover="playHover(this);" class="GameBoxDownloadButton"  >
 				<div style="transform: translateY(7px);">
 					Download ZIP
 				</div>
@@ -28,5 +29,7 @@
 			<img src="back.png" class="backButton" onclick="back2MainMenu();">
 			
 		</div>
-		<script type="text/javascript" src="script.js"></script>
+		<button onclick="playClick();">NUTOEN</button>
+		
+		<script src="script.js"></script>
 	</body>

@@ -1,6 +1,5 @@
 const gameList = document.getElementById("GameList");
 const gameDiv = document.getElementById("GameBox");
-
 //Request Games List
 var httpRequest = new XMLHttpRequest();
 httpRequest.onload = function (data) {
@@ -28,6 +27,8 @@ function isJSON(str) {
     return false;
   }
 }
+
+var curGame;
 function addGame2List(game) {
   //CREATE OUTER DIV
   var outerDiv = document.createElement("div");
@@ -51,8 +52,8 @@ function addGame2List(game) {
   versionNumber.innerText = game.version;
   outerDiv.appendChild(versionNumber);
 
-  //ADD CLICK TO GO TO GAME page
-  outerDiv.onclick = function () {
+  //Open page funtcion
+  const openGamePage = () => {
     gameDiv.style.display = "block";
     gameList.style.display = "none";
     gameDiv.querySelector(".GameBoxIcon").src = game.icon;
@@ -61,41 +62,35 @@ function addGame2List(game) {
     gameDiv.querySelector(".GameDescription").innerText = game.description;
     gameDiv.querySelector(".GameDownloads").innerText =
       game.downloads + " Downloads";
-    gameDiv
-      .querySelector(".GameBoxDownloadButton")
-      .setAttribute("downloadName", game.name);
-    gameDiv.querySelector(".GameBoxDownloadButton").href = game.downloadFile;
-    gameDiv
-      .querySelector(".GameBoxDownloadButton")
-      .setAttribute("downloadLink", game.downloadFile);
-    gameDiv.querySelector(".GameBoxDownloadButton").onclick = download;
+    gameDiv.setAttribute("downloadName", game.name);
+    gameDiv.setAttribute("downloadLink", game.downloadFile);
+
+    curGame = gameDiv;
   };
+  //ADD CLICK TO GO TO GAME page
+  outerDiv.addEventListener("click", openGamePage);
+  outerDiv.addEventListener("click", playClick);
+  outerDiv.addEventListener("mouseenter", playHover);
+  outerDiv.addEventListener("mouseleave", hoverFinish);
   //ADD TO GAME LIST
   gameList.appendChild(outerDiv);
 }
-async function download(event) {
-  var element = event.path[0];
+async function tellServer(element) {
   var noOfDownloadsEle = element.parentElement.querySelector(".GameDownloads");
   var number = parseInt(noOfDownloadsEle.innerText.split(" ")[0]);
   noOfDownloadsEle.innerText = ++number + " Downloads";
-  console.log(event);
-  console.log(event.path);
-
-  var name = element.getAttribute("downloadName");
-  var link = element.getAttribute("downloadLink");
-
   // DOWNLOAD THE GAME
   let xhr = new XMLHttpRequest();
   xhr.responseType = "blob";
   xhr.onload = function () {
     let a = document.createElement("a");
     a.href = window.URL.createObjectURL(xhr.response);
-    a.download = name;
     a.style.display = "none";
     document.body.appendChild(a);
     a.click();
     a.remove();
   };
+  var link = "/" + encodeURI(element.getAttribute("downloadName")) + "/d";
   xhr.open("GET", link);
   xhr.send();
 
@@ -107,4 +102,10 @@ async function download(event) {
 function back2MainMenu() {
   gameDiv.style.display = "none";
   gameList.style.display = "block";
+  playClick();
+}
+function downloadButtonClicked() {
+  tellServer(curGame);
+  playClick();
+  window.location.href = curGame.getAttribute("downloadLink");
 }
