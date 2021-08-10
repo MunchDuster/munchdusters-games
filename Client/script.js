@@ -1,20 +1,8 @@
 const gameList = document.getElementById("GameList");
 const gameDiv = document.getElementById("GameBox");
-//Request Games List
-var httpRequest = new XMLHttpRequest();
-httpRequest.onload = function (data) {
-  if (/*data.type == "Buffer"*/ isJSON(data.target.responseText)) {
-    console.log("json recieved");
-    var gamesList = JSON.parse(data.target.responseText);
-    console.log(gamesList);
 
-    for (var i = 0; i < gamesList.length; i++) {
-      addGame2List(gamesList[i]);
-    }
-  } else console.log("returned data is not json file");
-};
-httpRequest.open("GET", "/getGamesList");
-httpRequest.send();
+//Request Games List when window finished loading
+window.addEventListener("load", populateGamesList);
 
 //functions
 function isJSON(str) {
@@ -27,7 +15,26 @@ function isJSON(str) {
     return false;
   }
 }
+async function populateGamesList() {
+  try {
+    var httpRequest = new XMLHttpRequest();
+    httpRequest.onload = function (data) {
+      if (/*data.type == "Buffer"*/ isJSON(data.target.responseText)) {
+        console.log("json recieved");
+        var gamesList = JSON.parse(data.target.responseText);
+        console.log(gamesList);
 
+        for (var i = 0; i < gamesList.length; i++) {
+          addGame2List(gamesList[i]);
+        }
+      } else console.log("returned data is not json file");
+    };
+    httpRequest.open("GET", "/getGamesList");
+    httpRequest.send();
+  } catch (err) {
+    console.log(err);
+  }
+}
 var curGame;
 function addGame2List(game) {
   //CREATE OUTER DIV
@@ -93,11 +100,6 @@ async function tellServer(element) {
   var link = "/" + encodeURI(element.getAttribute("downloadName")) + "/d";
   xhr.open("GET", link);
   xhr.send();
-
-  //MESSAGE SERVER THAT USER HAS downloaded
-  var httpRequest = new XMLHttpRequest();
-  httpRequest.open("GET", "/" + encodeURI(name) + "/d");
-  httpRequest.send();
 }
 function back2MainMenu() {
   gameDiv.style.display = "none";
