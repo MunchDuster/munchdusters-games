@@ -5,6 +5,11 @@ const clickSound = new Audio("button02.mp3");
 hoverSound.volume = 0.5;
 clickSound.volume = 0.5;
 
+var playClick = () => { };
+var hoverClick = () => { };
+window.addEventListener("load", () => {
+    
+ });
 var curMouseOverButton;
 //play click sound
 function playClick() {
