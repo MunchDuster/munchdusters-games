@@ -2,41 +2,18 @@ const gameList = document.getElementById("GameList");
 const gameDiv = document.getElementById("GameBox");
 
 //Request Games List when window finished loading
-window.addEventListener("load", populateGamesList);
+fetch("/getGamesList").then(function (response) {
+  response.json().then((data) => {
+    console.log("json recieved");
+    data.forEach((game) => {
+      addGame(game);
+    });
+  });
+});
 
 //functions
-function isJSON(str) {
-  if (typeof str !== "string") return false;
-  try {
-    const result = JSON.parse(str);
-    const type = Object.prototype.toString.call(result);
-    return type === "[object Object]" || type === "[object Array]";
-  } catch (err) {
-    return false;
-  }
-}
-async function populateGamesList() {
-  try {
-    var httpRequest = new XMLHttpRequest();
-    httpRequest.onload = function (data) {
-      if (/*data.type == "Buffer"*/ isJSON(data.target.responseText)) {
-        console.log("json recieved");
-        var gamesList = JSON.parse(data.target.responseText);
-        console.log(gamesList);
-
-        for (var i = 0; i < gamesList.length; i++) {
-          addGame2List(gamesList[i]);
-        }
-      } else console.log("returned data is not json file");
-    };
-    httpRequest.open("GET", "/getGamesList");
-    httpRequest.send();
-  } catch (err) {
-    console.log(err);
-  }
-}
 var curGame;
-function addGame2List(game) {
+function addGame(game) {
   //CREATE OUTER DIV
   var outerDiv = document.createElement("div");
   outerDiv.className = "ListedGame";
@@ -59,7 +36,7 @@ function addGame2List(game) {
   versionNumber.innerText = game.version;
   outerDiv.appendChild(versionNumber);
 
-  //Open page funtcion
+  //Open page function
   const openGamePage = () => {
     gameDiv.style.display = "block";
     gameList.style.display = "none";
@@ -70,6 +47,9 @@ function addGame2List(game) {
     gameDiv.querySelector(".GameDownloads").innerText =
       game.downloads + " Downloads";
     gameDiv.setAttribute("downloadName", game.name);
+    gameDiv
+      .querySelector(".GameDownloads")
+      .setAttribute("downloads", game.downloads);
     gameDiv.setAttribute("downloadLink", game.downloadFile);
 
     curGame = gameDiv;
@@ -83,23 +63,13 @@ function addGame2List(game) {
   gameList.appendChild(outerDiv);
 }
 async function tellServer(element) {
-  var noOfDownloadsEle = element.parentElement.querySelector(".GameDownloads");
-  var number = parseInt(noOfDownloadsEle.innerText.split(" ")[0]);
-  noOfDownloadsEle.innerText = ++number + " Downloads";
-  // DOWNLOAD THE GAME
-  let xhr = new XMLHttpRequest();
-  xhr.responseType = "blob";
-  xhr.onload = function () {
-    let a = document.createElement("a");
-    a.href = window.URL.createObjectURL(xhr.response);
-    a.style.display = "none";
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-  };
-  var link = "/" + encodeURI(element.getAttribute("downloadName")) + "/d";
-  xhr.open("GET", link);
-  xhr.send();
+  var downloadNumberElement =
+    element.parentElement.querySelector(".GameDownloads");
+  var number = parseInt(downloadNumberElement.getAttribute("downloads"));
+  downloadNumberElement.innerText = ++number + " Downloads";
+  // TELL SERVER THE GAME
+  const link = "/" + encodeURI(element.getAttribute("downloadName")) + "/d";
+  fetch(link, { method: "GET" });
 }
 function back2MainMenu() {
   gameDiv.style.display = "none";

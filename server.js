@@ -7,8 +7,6 @@ const path = require("path");
 const rawdata = fs.readFileSync(path.resolve(__dirname, "data.json"));
 const gamesData = JSON.parse(rawdata);
 
-console.log(new Date().toUTCString());
-
 //Start server
 const express = require("express");
 const { response } = require("express");
@@ -19,17 +17,17 @@ const http = require("http").createServer(app);
 app.use(express.static(__dirname + "/Client"));
 
 //Log available Games
-
 console.log("Available Games: " + gamesData.length);
 for (var i = 0; i < gamesData.length; i++) {
   console.log(i + 1 + ". " + gamesData[i].name);
 
   //Listen for game downloaded signal
   const thisi = i;
-  app.get("/" + encodeURI(gamesData[i].name) + "/d", function (req, res) {
+  app.get("/" + encodeURI(gamesData[i].name) + "/d", (request, response) => {
     console.log(gamesData[thisi].name + " has had a download.");
     gamesData[thisi].downloads++;
     updateJSON();
+    response.end();
   });
 }
 
