@@ -1,19 +1,21 @@
 const gameList = document.getElementById("GameList");
 const gameDiv = document.getElementById("GameBox");
+var curGame;
 
-//Request Games List when window finished loading
-fetch("/getGamesList").then(function (response) {
-  response.json().then((data) => {
-    console.log("json recieved");
-    data.forEach((game) => {
-      addGame(game);
-    });
-  });
-});
+//Request Games List
+populateGamesList();
 
 //functions
-var curGame;
-function addGame(game) {
+async function populateGamesList() {
+  fetch("/getGamesList").then(function (response) {
+    response.json().then((data) => {
+      data.forEach((game) => {
+        addGame(game);
+      });
+    });
+  });
+}
+async function addGame(game) {
   //CREATE OUTER DIV
   var outerDiv = document.createElement("div");
   outerDiv.className = "ListedGame";
@@ -36,23 +38,30 @@ function addGame(game) {
   versionNumber.innerText = game.version;
   outerDiv.appendChild(versionNumber);
 
+  game.gameDiv = gameDiv;
+  game.downloadsElement = gameDiv.querySelector(".GameDownloads");
+
   //Open page function
   const openGamePage = () => {
+    //hide games list and show and game box
     gameDiv.style.display = "block";
     gameList.style.display = "none";
+
+    //set game box stuff
     gameDiv.querySelector(".GameBoxIcon").src = game.icon;
     gameDiv.querySelector(".GameBoxName").innerText = game.name;
-    gameDiv.querySelector(".GameBoxVersionNumber").innerText = game.version;
+    gameDiv.querySelector(".GameVersionNumber").innerText = game.version;
     gameDiv.querySelector(".GameDescription").innerText = game.description;
     gameDiv.querySelector(".GameDownloads").innerText =
       game.downloads + " Downloads";
-    gameDiv.setAttribute("downloadName", game.name);
-    gameDiv
-      .querySelector(".GameDownloads")
-      .setAttribute("downloads", game.downloads);
-    gameDiv.setAttribute("downloadLink", game.downloadFile);
 
-    curGame = gameDiv;
+    //show play button if game can play test
+    if (game.hasPlayTest) {
+      gameDiv.querySelector(".GamePlayButton").style.display = "inline-block";
+    } else {
+      gameDiv.querySelector(".GamePlayButton").style.display = "none";
+    }
+    curGame = game;
   };
   //ADD CLICK TO GO TO GAME page
   outerDiv.addEventListener("click", openGamePage);
@@ -62,22 +71,22 @@ function addGame(game) {
   //ADD TO GAME LIST
   gameList.appendChild(outerDiv);
 }
-async function tellServer(element) {
-  var downloadNumberElement =
-    element.parentElement.querySelector(".GameDownloads");
-  var number = parseInt(downloadNumberElement.getAttribute("downloads"));
-  downloadNumberElement.innerText = ++number + " Downloads";
+async function tellServer(game) {
+  game.downloadsElement.innerText = ++game.downloads + " Downloads";
   // TELL SERVER THE GAME
-  const link = "/" + encodeURI(element.getAttribute("downloadName")) + "/d";
+  const link = "/" + encodeURI(game.name) + "/d";
   fetch(link, { method: "GET" });
 }
-function back2MainMenu() {
+async function backToMenu() {
   gameDiv.style.display = "none";
   gameList.style.display = "block";
   playClick();
 }
-function downloadButtonClicked() {
+async function downloadButtonClicked() {
   tellServer(curGame);
   playClick();
-  window.location.href = curGame.getAttribute("downloadLink");
+  window.location.href = curGame.downloadFile;
+}
+async function playGame() {
+  window.location.href = curGame.playTestLink;
 }

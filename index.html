@@ -2,34 +2,40 @@
 	<head> 
 		<title>MunchDuster's Games</title>
 		<link rel="shortcut icon" href="mememan.png" />
-		<link rel="preconnect" href="https://fonts.gstatic.com">
+		
+        <link rel="preconnect" href="https://fonts.gstatic.com">
 		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
 		<link rel="preconnect" href="https://fonts.gstatic.com">
 		<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 		<link rel="preconnect" href="https://fonts.gstatic.com">
 		<link href="https://fonts.googleapis.com/css2?family=Arimo&display=swap" rel="stylesheet">
-		<link rel="stylesheet" href="style.css">
+		
+        <link rel="stylesheet" href="gameList.css">
+        <link rel="stylesheet" href="gameBox.css">
+        <link rel="stylesheet" href="style.css">
 	</head>
 	<body>
 	<script src="sounds.js"></script>
 		<h1>MunchDuster's Games</h1>	
 		<div id="GameList" class="GameList"></div>
+        
 		<div id="GameBox" class="GameBox">
+            
 			<img class="GameBoxIcon"></img>
 			<div class="GameBoxName"></div>
-			<div class="GameBoxVersionNumber"></div>
-			<a href="javascript:downloadButtonClicked();" onhover="playHover(this);" class="GameBoxDownloadButton"  >
-				<div style="transform: translateY(7px);">
+			<div class="GameVersionNumber"></div>
+			<button onclick="downloadButtonClicked();" onmouseenter="playHover(this);" class="GameDownloadButton"  >
 					Download ZIP
-				</div>
-			</a>
+			</button>
+            <button onclick="playGame();" onmouseenter="playHover(this);" class="GamePlayButton">
+                Play Now
+            </button>
 			<div class="GameDescriptionTitle">Description</div>
 			<div class="GameDescription"></div>
 			<div class="GameDownloads">45 Downloads</div>
-			<img src="back.png" class="backButton" onclick="back2MainMenu();">
+			<img src="back.png" class="backButton" onclick="backToMenu();">
 			
 		</div>
-		<button onclick="playClick();">NUTOEN</button>
 		
-		<script src="script.js"></script>
+		<script src="main.js"></script>
 	</body>

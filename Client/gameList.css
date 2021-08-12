@@ -1,0 +1,80 @@
+.ListedGame {
+  width: calc(100% - 10px);
+  max-width: 600px;
+  height: 70px;
+  background-color: rgb(33, 33, 33);
+  border-radius: 5px;
+  margin: 5px;
+  text-align: left;
+  cursor: pointer;
+  user-select: none;
+}
+.GameList {
+  padding: 5px;
+  text-align: -webkit-center;
+  bottom: 0px;
+  top: 60px;
+  width: calc(100% - 10px);
+  position: absolute;
+  min-height: calc(100% - 70px);
+}
+.ListedGame:hover {
+  background-color: #4b4b4b;
+}
+.ListedGame:hover {
+  background-color: #777777;
+  transform: scale(1.05, 1.05);
+}
+.GameName {
+  color: white;
+  font-family: "Roboto";
+  font-size: 50px;
+  height: 70px;
+  vertical-align: top;
+  margin-top: 20px;
+  display: inline-block;
+}
+.GameIcon {
+  width: 60px;
+  height: 60px;
+  margin: 5px;
+  display: inline-block;
+  border-radius: 3px;
+}
+.VersionNumber {
+  font-size: 15px;
+  display: inline-block;
+  color: white;
+  font-family: "Arimo";
+  margin-bottom: 20px;
+  vertical-align: text-bottom;
+  margin-left: 5px;
+}
+.GameDownloads {
+  color: white;
+  font-size: 17;
+  font-family: "Roboto";
+  position: absolute;
+  left: 130;
+  top: 85;
+}
+.GameVersionNumber {
+  font-size: 25px;
+  top: 60;
+  display: inline-block;
+  color: white;
+  font-family: "Arimo";
+  margin-bottom: 20px;
+  vertical-align: text-bottom;
+  margin-left: 5px;
+  position: absolute;
+}
+.GameName {
+  color: white;
+  font-family: "Roboto";
+  font-size: 30px;
+  height: 70px;
+  vertical-align: top;
+  margin-top: 20px;
+  display: inline-block;
+}

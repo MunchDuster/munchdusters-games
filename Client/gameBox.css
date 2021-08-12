@@ -1,0 +1,129 @@
+.GamePlayButton,
+.GameDownloadButton {
+  font-family: "Roboto";
+  font-size: 20px;
+
+  background-color: #353535;
+  color: #d4d4d6;
+  border: none;
+
+  height: 40px;
+  width: 150;
+
+  position: absolute;
+  top: 120;
+
+  cursor: pointer;
+}
+.GameDownloadButton {
+  left: 140;
+}
+.GamePlayButton {
+  left: 300;
+}
+.GameDownloadButton:hover,
+.GamePlayButton:hover {
+  background-color: #4b4b4b;
+}
+.GameBoxDownloadButton:active,
+.GameBoxPlayButton:active {
+  background-color: #777777;
+  transform: scale(1.05, 1.05);
+}
+.GameBoxIcon {
+  width: 100px;
+  height: 100px;
+  margin: 5px;
+  display: inline-block;
+  border-radius: 5px;
+}
+.GameBox,
+.PlayGameBox {
+  position: absolute;
+  top: 60px;
+  width: calc(100% - 30px);
+  margin: 10px;
+  padding: 5px;
+  display: none;
+  border-radius: 6px;
+  bottom: 0px;
+  background-color: rgb(33, 33, 33);
+  float: left;
+}
+.playGameIframe {
+  width: calc(100% - 30px);
+  height: 100%;
+}
+
+.PlayGameBox {
+  z-index: 100;
+}
+.GameBoxName {
+  color: white;
+  font-family: "Roboto";
+  font-size: 30px;
+  height: 70px;
+  vertical-align: top;
+  margin-top: 20px;
+  display: inline-block;
+}
+.DownloadIcon {
+  width: 40px;
+  height: 40px;
+  float: right;
+  margin: 10px;
+
+  background-color: white;
+  padding: 5px;
+  border-radius: 100px;
+}
+.GameDownloads {
+  color: white;
+  font-size: 17;
+  font-family: "Roboto";
+  position: absolute;
+  left: 130;
+  top: 85;
+}
+.GameVersionNumber {
+  font-size: 25px;
+  top: 60;
+  display: inline-block;
+  color: white;
+  font-family: "Arimo";
+  margin-bottom: 20px;
+  vertical-align: text-bottom;
+  margin-left: 5px;
+  position: absolute;
+}
+.GameDescriptionTitle {
+  color: white;
+  font-size: 15px;
+  position: absolute;
+  left: 15%;
+  top: 190px;
+  font-family: "Roboto", sans-serif;
+}
+.GameDescription {
+  color: white;
+  font-size: 17px;
+  font-family: "Roboto", sans-serif;
+  position: absolute;
+  top: 210;
+  left: 20;
+  width: calc(100% - 50px);
+  height: fit-content;
+  min-height: 100px;
+  padding: 10px;
+  background-color: #353535;
+}
+.backButton {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  width: 50px;
+  filter: invert();
+  background-color: #dfdfdf;
+  border-radius: 5px;
+  cursor: pointer;
+}

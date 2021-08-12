@@ -2,12 +2,9 @@
 const hoverSound = new Audio("button01.mp3");
 const clickSound = new Audio("button02.mp3");
 
-hoverSound.volume = 0.2;
-clickSound.volume = 0.2;
+hoverSound.volume = 0.1;
+clickSound.volume = 0.025;
 
-var playClick = () => {};
-var hoverClick = () => {};
-window.addEventListener("load", () => {});
 var curMouseOverButton;
 //play click sound
 function playClick() {
@@ -19,12 +16,15 @@ function hoverFinish() {
   curMouseOverButton = null;
 }
 //play hover sound if entered game div
-function playHover(event) {
+function hoverGameDiv(event) {
   if (!isDescendantOf(curMouseOverButton, event.path)) {
     curMouseOverButton = event.path[0];
-    hoverSound.currentTime = 0;
-    hoverSound.play();
+    playHover();
   }
+}
+function playHover(event) {
+  hoverSound.currentTime = 0;
+  hoverSound.play().catch((err) => {});
 }
 //return whether array childPath contains ele
 function isDescendantOf(ele, childPath) {
