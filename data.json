@@ -71,5 +71,23 @@
             "First upload so there are no updates."
         ],
         "description": "Epic slidy cube game.\n My newest game, its got levels, nice(very bad) transitions, etc.\n But most of all...\nMUSIC, from www.bensound.com, a royalty free music website. I haven't spent any money on audio (or anything else)."
+    },
+    {
+        "name": "Fractals",
+        "hasPlayTest": false,
+        "genre": "Explore",
+        "version": 0.1,
+        "downloads": 2,
+        "downloadFile": "files/Fractals/0.1/Fractals.zip",
+        "icon": "files/Fractals/0.1/icon.png",
+        "releaseDate": {
+            "day": 12,
+            "month": 9,
+            "year": 2021
+        },
+        "updates": [
+            "First upload so there are no updates."
+        ],
+        "description": "Explore the mandelbrot set using the power of GPU.\nIf you don't have a or a decent GPU will show white instead of fractal.\nPS: For the record, I found out afterwards there's a mandelbrot set compute shader on the Unity Asset Store. Afterwards."
     }
 ]
