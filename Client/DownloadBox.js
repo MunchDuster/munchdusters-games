@@ -9,11 +9,13 @@ function hideDownloadBox() {
 function showDownloadBox() {
 	downloadBox.style.display = 'block';
 	downloadButton.style.display = 'none';
-	downloadMessage.innerText = "fetching files";
+	downloadMessage.innerText = "fetching files...";
+	updateDownloadPercent(0, 0);
 }
 function showDownloadButton() {
 	downloadButton.style.display = 'inline-block';
 	downloadMessage.innerText = "Download ready";
+	updateDownloadPercent(1, curGame.bytes);
 }
 function updateDownloadPercent(percent, totalBytes) {
 	downloadPercent.innerText = Math.floor(percent * 100).toString() + "% ( " + (Math.floor(totalBytes / 100000) / 10) + "MB )";

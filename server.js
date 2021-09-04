@@ -46,6 +46,7 @@ function addAppListeners() {
 	//Listen for game request
 	app.post("/getGame", (request, response) => {
 		sendGame(request, response);
+
 	});
 	//Listen for game download
 	app.post("/downloadGame", (request, response) => {
@@ -73,18 +74,17 @@ function startServer() {
 function OnGameDownloaded(game) {
 	addGameDownloadToDatabase(game.name);
 }
-function sendGame(req, res) {
-	const fileLocation = '/gameFiles/' + req.body.name + ".zip";
+function sendGame(req, response) {
+	const fileLocation = '/gameFiles/';
 	const fileName = req.body.name + ".zip";
 
-	var filePath = path.join(__dirname, fileLocation);
+	var filePath = path.join(__dirname, fileLocation + fileName);
 	var stat = file_system.statSync(filePath);
 
-	res.setHeader('Content-Length', stat.size);
-	res.setHeader('Content-Type', 'application/zip');
-	res.setHeader('Content-Disposition', 'attachment; filename=' + fileName);
-
-	res.download(filePath, req.body.name, (err) => { if (err) console.log(err); });
+	response.setHeader('Content-Length', stat.size);
+	response.setHeader('Content-Disposition', 'attachment;filename=SlidyCubes.zip');
+	response.setHeader('Content-Type', 'application/octet-stream');
+	response.download(filePath);
 }
 function onExit(exitCode, signal) {
 	client.close();

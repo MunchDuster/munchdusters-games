@@ -57,7 +57,6 @@ async function backToMenu() {
 	gameList.style.display = "block";
 	playClick();
 }
-
 async function playGame() {
 	window.location.href = curGame.playTestLink;
 }
