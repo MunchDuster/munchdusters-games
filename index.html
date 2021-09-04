@@ -10,8 +10,10 @@
 		<link rel="preconnect" href="https://fonts.gstatic.com">
 		<link href="https://fonts.googleapis.com/css2?family=Arimo&display=swap" rel="stylesheet">
 		
+		<link rel="stylesheet" href="DownloadBox.css">
         <link rel="stylesheet" href="gameList.css">
         <link rel="stylesheet" href="gameBox.css">
+		
         <link rel="stylesheet" href="style.css">
 	</head>
 	<body>
@@ -24,8 +26,8 @@
 			<img class="GameBoxIcon"></img>
 			<div class="GameBoxName"></div>
 			<div class="GameVersionNumber"></div>
-			<button onclick="downloadButtonClicked();" onmouseenter="playHover(this);" class="GameDownloadButton"  >
-					Download ZIP
+			<button onclick="importButtonClicked();" onmouseenter="playHover(this);" class="GameDownloadButton"  >
+					Download
 			</button>
             <button onclick="playGame();" onmouseenter="playHover(this);" class="GamePlayButton">
                 Play Now
@@ -34,8 +36,25 @@
 			<div class="GameDescription"></div>
 			<div class="GameDownloads">45 Downloads</div>
 			<img src="back.png" class="backButton" onclick="backToMenu();">
-			
+
+
+			<div id="DownloadBox" class="DownloadBox" >
+				<div class="InnerDownloadBox">
+					<div id="DownloadMessage" class="DownloadMessage">Fetching data...</div>
+					<progress class="DownloadBar" value="50" max="100" id="DownloadBar"></progress>
+					<div id="DownloadPercent" class="DownloadMessage">87%</div>
+					<div class="ButtonParent">
+					<button onclick="downloadGame();" id="DownloadButton" onmouseenter="playHover(this);" class="DownloadNowButton">
+						Download
+					</button>
+					<button onclick="cancelImport();" onmouseenter="playHover(this);" class="CancelButton">
+						Cancel
+					</button></div>
+				</div>
+			</div>
 		</div>
 		
-		<script src="main.js"></script>
+		<script src="DownloadBox.js"></script>
+		<script src="GameBox.js"></script>
+		<script src="GameList.js"></script>
 	</body>

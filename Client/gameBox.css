@@ -1,3 +1,4 @@
+.AnchorButton,
 .GamePlayButton,
 .GameDownloadButton {
   font-family: "Roboto";
@@ -15,21 +16,26 @@
 
   cursor: pointer;
 }
+
 .GameDownloadButton {
   left: 140;
 }
 .GamePlayButton {
   left: 300;
 }
+.AnchorButton:hover,
 .GameDownloadButton:hover,
 .GamePlayButton:hover {
   background-color: #4b4b4b;
 }
+
+.AnchorButton:active,
 .GameBoxDownloadButton:active,
 .GameBoxPlayButton:active {
   background-color: #777777;
   transform: scale(1.05, 1.05);
 }
+
 .GameBoxIcon {
   width: 100px;
   height: 100px;

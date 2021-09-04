@@ -1,0 +1,68 @@
+.DownloadBox {
+  position: absolute;
+  height: 300px;
+  width: 500px;
+  background-color: #444444;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+  display: none;
+}
+.DownloadBar {
+  width: 300;
+  height: 40;
+}
+.DownloadMessage {
+  font-size: xx-large;
+  font-family: "Poppins";
+}
+.CancelButton {
+  margin: 5px;
+  right: 130px;
+  font-family: "Roboto";
+  font-size: 20px;
+
+  background-color: #353535;
+  color: #d4d4d6;
+  border: none;
+
+  height: 40px;
+  width: 150;
+
+  top: 160;
+
+  cursor: pointer;
+}
+.DownloadNowButton {
+  cursor: pointer;
+  margin: 5px;
+  right: 300px;
+  font-family: "Roboto";
+  font-size: 20px;
+  display: inline-block;
+
+  background-color: #353535;
+  color: #d4d4d6;
+  border: none;
+
+  height: 40px;
+  width: 150;
+
+  top: 160;
+}
+
+.DownloadNowButton:hover,
+.CancelButton:hover {
+  background-color: #4b4b4b;
+}
+.InnerDownloadBox {
+  height: 100%;
+  margin-top: 5%;
+}
+.ButtonParent {
+  position: absolute;
+  width: 100%;
+  top: 200px;
+}

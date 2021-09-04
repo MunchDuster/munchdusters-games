@@ -4,7 +4,7 @@
         "hasPlayTest": false,
         "genre": "retro",
         "version": 1,
-        "downloads": 22,
+        "downloads": 4,
         "downloadFile": "files/Pong/1.0/Pong.zip",
         "icon": "files/Pong/1.0/icon.png",
         "releaseDate": {
@@ -15,14 +15,14 @@
         "updates": [
             "First upload so there are no updates."
         ],
-        "description": "I made pong, Pong is the first video game.\nI wrote this with Python, my first game in python, graphics with pygame and built with pyinstaller."
+        "description": "I made pong, Pong is said the first video game.\nI wrote this with Python, my first game in python, graphics with pygame and built with pyinstaller."
     },
     {
         "name": "Mr Pew Pew",
         "hasPlayTest": false,
         "genre": "FPS",
         "version": 0.1,
-        "downloads": 13,
+        "downloads": 5,
         "downloadFile": "files/Mr Pew Pew/0.1/Mr Pew Pew.zip",
         "icon": "files/Mr Pew Pew/0.1/icon.png",
         "releaseDate": {
@@ -40,7 +40,7 @@
         "hasPlayTest": true,
         "playTestLink": "https://unity-webgl-node.herokuapp.com",
         "genre": "Vehicle",
-        "downloads": 10,
+        "downloads": 3,
         "version": 0.1,
         "downloadFile": "files/Drifty Tanks/0.1/Drifty Tanks.zip",
         "icon": "files/Drifty Tanks/0.1/icon.png",

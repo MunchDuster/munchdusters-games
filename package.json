@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "description": "where i put my games",
   "main": "gamescript.js",
-"dependencies": {
+  "dependencies": {
+    "adm-zip": "^0.5.5",
     "express": "^4.17.1",
+    "mongodb": "^4.1.1",
+    "node-cleanup": "^2.1.2",
     "openssl": "^1.1.0"
   },
   "scripts": {

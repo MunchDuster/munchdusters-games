@@ -1,59 +1,123 @@
 const PORT = process.env.PORT || 8080;
+var gamesData;
+var collection;
 
-//Send files packages
-const fs = require("fs");
-const path = require("path");
-
-const rawdata = fs.readFileSync(path.resolve(__dirname, "data.json"));
-const gamesData = JSON.parse(rawdata);
-
-//Start server
-const express = require("express");
-const { response } = require("express");
+//REQUIREMENTS
+const path = require('path');
+const express = require('express');
+const { MongoClient } = require('mongodb');
 const app = express();
-const http = require("http").createServer(app);
+const http = require('http').createServer(app);
+const file_system = require('fs');
+const node_cleanup = require('node-cleanup');
+
+//MongoDB Database for get games list
+const uri = "mongodb+srv://themrduder:mememan@cluster0.h3bqk.mongodb.net/database01?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+
+//Listen for node exit
+node_cleanup(onExit);
+
+//Connect to database
+console.log("Connecting to database...");
+client.connect(OnMongoClientConnected);
+
 
 //Set static files
 app.use(express.static(__dirname + "/Client"));
+app.use(express.json());
 
-//Log available Games
-console.log("Available Games: " + gamesData.length);
-for (var i = 0; i < gamesData.length; i++) {
-  console.log(i + 1 + ". " + gamesData[i].name);
+//LISTENERS
+async function OnMongoClientConnected(err) {
+	if (err) {
+		console.log("Connection failed: " + err);
+	} else {
+		console.log("Connected successfully.")
+	}
+	collection = client.db("database01").collection("maindata");
 
-  //Listen for game downloaded signal
-  const thisi = i;
-  app.get("/" + encodeURI(gamesData[i].name) + "/d", (request, response) => {
-    console.log(gamesData[thisi].name + " has had a download.");
-    gamesData[thisi].downloads++;
-    updateJSON();
-    response.end();
-  });
+	var results = await collection.find().toArray();
+	gamesData = results;
+
+	addAppListeners();
+	startServer();
+}
+function addAppListeners() {
+	//Listen for game request
+	app.post("/getGame", (request, response) => {
+		sendGame(request, response);
+	});
+	//Listen for game download
+	app.post("/downloadGame", (request, response) => {
+		console.log("Game download " + displayTime() + ": " + request.body.name);
+		OnGameDownloaded(request.body);
+		response.end();
+	});
+	//Listen for main page
+	app.get("/", function (req, res) {
+		res.sendFile(__dirname + "/index.html");
+	});
+	//Listen for gamesList request
+	app.get("/getGamesList", function (require, response) {
+		response.json(gamesData);
+	});
+}
+function startServer() {
+	http.listen(PORT, () => {
+		console.log("Listening at port: " + PORT);
+	});
 }
 
-//Listen for main page
-app.get("/", function (req, res) {
-  res.sendFile(__dirname + "/index.html");
-});
-//Listen for gamesList request
-app.get("/getGamesList", function (require, response) {
-  response.json(gamesData);
-});
 
-//SERVER LISTEN
-http.listen(PORT, () => {
-  console.log("listening on " + PORT);
-});
+//FUNCTIONS
+function OnGameDownloaded(game) {
+	addGameDownloadToDatabase(game.name);
+}
+function sendGame(req, res) {
+	const fileLocation = '/gameFiles/' + req.body.name + ".zip";
+	const fileName = req.body.name + ".zip";
 
-//UPDATE JSON file
-function updateJSON() {
-  var string = JSON.stringify(gamesData);
-  /*
-  string = string.replace(/,/g, ",\n");
-  string = string.replace(/}/g, "}\n");
-  string = string.replace(/{/g, "{\n");
-  */
-  fs.writeFile("data.json", string, function (err) {
-    if (err) throw err;
-  });
+	var filePath = path.join(__dirname, fileLocation);
+	var stat = file_system.statSync(filePath);
+
+	res.setHeader('Content-Length', stat.size);
+	res.setHeader('Content-Type', 'application/zip');
+	res.setHeader('Content-Disposition', 'attachment; filename=' + fileName);
+
+	res.download(filePath, req.body.name, (err) => { if (err) console.log(err); });
+}
+function onExit(exitCode, signal) {
+	client.close();
+	console.log('exitting');
+}
+
+function displayTime() {
+	var date = new Date();
+	var time = setLength(date.getSeconds(), 2) + ":" + setLength(date.getMinutes(), 2) + ":" + setLength(date.getHours(), 2);
+	var date = setLength(date.getDate(), 2) + "/" + setLength(date.getMonth(), 2) + "/" + setLength(date.getFullYear(), 4);
+	return time + " " + date;
+}
+function setLength(number, chars) {
+	var str = number.toString();
+	var charsNeeded = chars - str.length;
+	for (var i = 0; i < charsNeeded; i++) {
+		str = "0" + str;
+	}
+	return str;
+}
+function addGameDownloadToDatabase(gameName) {
+	const filter = { name: gameName };
+	// update the value of the 'z' field to 42
+	const updateDocument = {
+		$inc: {
+			downloads: 1
+		}
+	};
+	collection.updateOne(filter, updateDocument).then(result => {
+		const { matchedCount, modifiedCount } = result;
+		if (matchedCount && modifiedCount) {
+			console.log(`Successfully databased.`)
+		}
+	})
+		.catch(err => console.error(`Failed to database: ${err}`))
 }
