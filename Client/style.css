@@ -17,3 +17,15 @@ h1 {
   width: 100%;
   z-index: 1;
 }
+.sideNote {
+  right: 0px;
+  padding: 5px;
+  background-color: grey;
+  width: 180;
+  position: absolute;
+  top: 54;
+  margin: 5px;
+  color: white;
+  font-family: -webkit-pictograph;
+  text-align: center;
+}
