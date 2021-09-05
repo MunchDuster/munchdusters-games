@@ -4,17 +4,19 @@ body {
 }
 
 h1 {
-  background-color: white;
-  font-family: "Poppins";
-  margin: 5px;
-  margin-top: 0px;
   position: fixed;
-  margin-left: 50%;
-  transform: translateX(-50%);
+  top: 5px;
+  width: fit-content;
+  padding: 1px 20px;
+
+  background-color: #ffffff45;
+  font-family: "Poppins";
+
   text-align: center;
   font-size: 35px;
-  top: 0px;
-  width: 100%;
+
+  border-radius: 40px;
+  display: inline-block;
   z-index: 1;
 }
 .sideNote {
