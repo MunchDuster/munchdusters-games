@@ -19,6 +19,7 @@ async function addGame(game) {
 	//CREATE OUTER DIV
 	var outerDiv = document.createElement("div");
 	outerDiv.className = "ListedGame";
+	if (game.broken) outerDiv.className += " BrokenGame";
 
 	//GAME ICON
 	var gameIcon = document.createElement("img");

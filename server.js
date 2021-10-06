@@ -20,6 +20,7 @@ node_cleanup(onExit);
 
 //Connect to database
 console.log("Connecting to database...");
+var times = [process.uptime()]
 client.connect(OnMongoClientConnected);
 
 
@@ -31,49 +32,61 @@ app.use(express.json());
 async function OnMongoClientConnected(err) {
 	if (err) {
 		console.log("Connection failed: " + err);
+
 	} else {
 		console.log("Connected successfully.")
+		times.unshift(process.uptime());
+		console.log(`Time taken to connect to database: ${times[0] - times[1]}s`);
 	}
 	collection = client.db("database01").collection("maindata");
 
 	var results = await collection.find().toArray();
 	gamesData = results;
 
+	times.unshift(process.uptime());
+	console.log(`Time taken to get games from server: ${times[0] - times[1]}s`);
+
 	addAppListeners();
 	startServer();
 }
 function addAppListeners() {
-	//Listen for game request
-	app.post("/getGame", (request, response) => {
-		sendGame(request, response);
-
-	});
-	//Listen for game download
-	app.post("/downloadGame", (request, response) => {
-		console.log("Game download " + displayTime() + ": " + request.body.name);
-		OnGameDownloaded(request.body);
-		response.end();
-	});
 	//Listen for main page
 	app.get("/", function (req, res) {
 		res.sendFile(__dirname + "/index.html");
 	});
+
 	//Listen for gamesList request
 	app.get("/getGamesList", function (require, response) {
 		response.json(gamesData);
 	});
+
+	//Listen for game request
+	app.post("/getGame", (request, response) => {
+		sendGame(request, response);
+	});
+
+	//Listen for game download
+	app.post("/downloadGame", (request, response) => {
+		console.log("Game download " + displayTime() + ": " + request.body.name);
+		addGameDownloadToDatabase(request.body.name);
+		response.end();
+	});
+
+	times.unshift(process.uptime());
+	console.log(`Time taken to add app listeners: ${times[0] - times[1]}s`);
 }
 function startServer() {
 	http.listen(PORT, () => {
 		console.log("Listening at port: " + PORT);
+
+		times.unshift(process.uptime());
+		console.log(`Time taken to start server: ${times[0] - times[1]}s`);
 	});
+
 }
 
 
 //FUNCTIONS
-function OnGameDownloaded(game) {
-	addGameDownloadToDatabase(game.name);
-}
 function sendGame(req, response) {
 	const fileLocation = '/gameFiles/';
 	const fileName = req.body.name + ".zip";
@@ -118,6 +131,5 @@ function addGameDownloadToDatabase(gameName) {
 		if (matchedCount && modifiedCount) {
 			console.log(`Successfully databased.`)
 		}
-	})
-		.catch(err => console.error(`Failed to database: ${err}`))
+	}).catch(err => console.error(`Failed to update database game downloads: ${err}`))
 }

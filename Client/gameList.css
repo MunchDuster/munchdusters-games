@@ -1,22 +1,22 @@
+:root {
+  --broken: rgb(216, 143, 9);
+  --broken-hover: rgb(255, 166, 0);
+}
+
 .ListedGame {
-  width: calc(100% - 10px);
+  width: 70%;
   max-width: 600px;
-  height: 70px;
+
   background-color: rgb(33, 33, 33);
   border-radius: 5px;
   margin: 5px;
   text-align: left;
   cursor: pointer;
-  user-select: none;
+  font-size: min(4vw, 30px);
+  position: relative;
 }
 .GameList {
-  padding: 5px;
   text-align: -webkit-center;
-  bottom: 0px;
-  top: 60px;
-  width: calc(100% - 10px);
-  position: absolute;
-  min-height: calc(100% - 70px);
 }
 .ListedGame:hover {
   background-color: #4b4b4b;
@@ -25,30 +25,22 @@
   background-color: #777777;
   transform: scale(1.05, 1.05);
 }
-.GameName {
-  color: white;
-  font-family: "Roboto";
-  font-size: 50px;
-  height: 70px;
-  vertical-align: top;
-  margin-top: 20px;
-  display: inline-block;
-}
 .GameIcon {
-  width: 60px;
-  height: 60px;
+  width: min(4em, 60px);
+  height: min(4em, 60px);
   margin: 5px;
   display: inline-block;
   border-radius: 3px;
 }
 .VersionNumber {
-  font-size: 15px;
+  font-size: 0.7em;
   display: inline-block;
   color: white;
   font-family: "Arimo";
-  margin-bottom: 20px;
-  vertical-align: text-bottom;
   margin-left: 5px;
+  height: 50%;
+  position: absolute;
+  bottom: 0px;
 }
 .GameDownloads {
   color: white;
@@ -72,9 +64,34 @@
 .GameName {
   color: white;
   font-family: "Roboto";
-  font-size: 30px;
-  height: 70px;
   vertical-align: top;
-  margin-top: 20px;
+  margin-top: 0.5em;
   display: inline-block;
+}
+
+.BrokenGame {
+  background-color: var(--broken);
+  position: relative;
+}
+.BrokenGame::before {
+  content: "Broken!";
+  color: white;
+  border: solid 2px white;
+  position: absolute;
+  padding: min(0.5em, 4px) 0.5em;
+  right: 10%;
+  font-size: 0.7em;
+  top: 50%;
+  font-family: "Roboto";
+  border-radius: 9px;
+  transform: translateY(-50%);
+}
+.BrokenGame:hover {
+  background-color: var(--broken-hover);
+}
+
+.BrokenGame:hover::before {
+  content: "Broken!";
+  background-color: white;
+  color: var(--broken-hover);
 }

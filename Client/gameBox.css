@@ -114,17 +114,23 @@
   color: white;
   font-size: 17px;
   font-family: "Roboto", sans-serif;
-  position: absolute;
-  top: 210;
-  left: 20;
+
   width: calc(100% - 50px);
   height: fit-content;
   min-height: 100px;
   padding: 10px;
+  margin-left: 20;
   background-color: #353535;
 }
+
+.GameInfo {
+  position: absolute;
+  top: 210px;
+}
+
 .backButton {
   position: absolute;
+
   top: 15px;
   right: 20px;
   width: 50px;

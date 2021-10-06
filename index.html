@@ -18,27 +18,32 @@
 	</head>
 	<body>
 	<script src="sounds.js"></script>
-		<h1>MunchDuster's Games</h1>	
-		<div class="sideNote">
-		<div style="margin-bottom: 5px;">Now using database: </div>
-		<img src="mongodb.png">
-		</div>
+		<div class="Header"></div>	
+		
 		<div id="GameList" class="GameList"></div>
-        
+		<div class="sideNote">
+			<img src="mongodb.png" width="100%">
+		</div>
 		<div id="GameBox" class="GameBox">
             
 			<img class="GameBoxIcon"></img>
 			<div class="GameBoxName"></div>
 			<div class="GameVersionNumber"></div>
+			<div class="GameDownloads">45 Downloads</div>
 			<button onclick="importButtonClicked();" onmouseenter="playHover(this);" class="GameDownloadButton"  >
 					Download
 			</button>
             <button onclick="playGame();" onmouseenter="playHover(this);" class="GamePlayButton">
                 Play Now
             </button>
-			<div class="GameDescriptionTitle">Description</div>
-			<div class="GameDescription"></div>
-			<div class="GameDownloads">45 Downloads</div>
+			<div class="GameInfo">
+				<div class="GameDescriptionTitle">Description</div>
+				<div id="GameDescription" class="GameDescription"></div>
+				<div class="GameDescriptionTitle">Updates</div>
+				<div id="GameUpdates" class="GameDescription"></div>
+			</div>
+			
+			
 			<img src="back.png" class="backButton" onclick="backToMenu();">
 
 
