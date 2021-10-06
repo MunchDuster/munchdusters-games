@@ -105,8 +105,8 @@
 .GameDescriptionTitle {
   color: white;
   font-size: 15px;
-  position: absolute;
-  left: 15%;
+  margin-left: 15%;
+  margin-top: 10px;
   top: 190px;
   font-family: "Roboto", sans-serif;
 }
@@ -115,16 +115,18 @@
   font-size: 17px;
   font-family: "Roboto", sans-serif;
 
-  width: calc(100% - 50px);
   height: fit-content;
   min-height: 100px;
   padding: 10px;
-  margin-left: 20;
+
+  margin-right: 10px;
+
   background-color: #353535;
 }
 
 .GameInfo {
   position: absolute;
+  display: block;
   top: 210px;
 }
 

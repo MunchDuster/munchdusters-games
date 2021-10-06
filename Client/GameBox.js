@@ -16,7 +16,11 @@ function OpenGame(game) {
 	gameBox.querySelector(".GameDownloads").innerText =
 		game.downloads + " Downloads";
 
-	gameBox.querySelector(".GameDownloads")
+	gameBox.querySelector(".GameUpdates").innerText = '';
+	for (var i = 0; i < game.updates.length; i++) {
+		gameBox.querySelector(".GameUpdates").innerText = (i + 1) + '.\n' + game.updates[i] + '\n\n' + gameBox.querySelector(".GameUpdates").innerText;
+	}
+
 
 	//show play button if game can play test
 	if (game.hasPlayTest) {
